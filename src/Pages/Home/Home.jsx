@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import { TabList, TabPanel, Tabs,Tab } from "react-tabs";
+import TouristStory from "./TouristStory";
 
 
 const Home = () => {
@@ -188,8 +189,8 @@ const Home = () => {
                             <div key={pkg._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
                                 <img src={pkg.photo} alt={pkg.tripTitle} className="w-full h-48 object-cover" />
                                 <div className="p-4">
-                                    <h3 className="text-xl font-semibold">{pkg.tripTitle}</h3>
-                                    <p className="text-gray-600">{pkg.tourType}</p>
+                                    <h3 className="text-xl font-semibold">{pkg.title}</h3>
+                                    <p className="text-gray-600">{pkg.type}</p>
                                     <p className="text-lg font-bold text-blue-500">${pkg.price}</p>
                                     <button
                                         onClick={() => window.location.href = `/package-details/${pkg._id}`}
@@ -208,7 +209,7 @@ const Home = () => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                         {guides.map((guide) => (
                             <div key={guide._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
-                                <img src={guide.profilePicture} alt={guide.name} className="w-full h-48 object-cover" />
+                                <img src={guide.profilePicture} alt={guide.name} className=" h-48 " />
                                 <div className="p-4">
                                     <h3 className="text-xl font-semibold">{guide.name}</h3>
                                     <p className="text-gray-600">Expertise: {guide.expertise}</p>
@@ -225,7 +226,7 @@ const Home = () => {
                 </TabPanel>
             </Tabs>
         </div>
-
+    <TouristStory></TouristStory>
         </div>
     );
 };
