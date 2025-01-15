@@ -5,9 +5,28 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
+import { TabList, TabPanel, Tabs,Tab } from "react-tabs";
 
 
 const Home = () => {
+     const axiosPublic=useAxiosPublic();
+    const [packages, setPackages] = useState([]);
+    const [guides, setGuides] = useState([]);
+    
+    useEffect(() => {
+        axiosPublic.get('/random-packages')
+            .then(response => setPackages(response.data))
+            .catch(error => console.error('Error fetching packages:', error));
+    }, [axiosPublic]);
+    
+    useEffect(() => {
+        axiosPublic.get('/random-guides')
+            .then(response => setGuides(response.data))
+            .catch(error => console.error('Error fetching guides:', error));
+    }, []);
+
     const handleRedirect = () => {
         console.log("Redirect to details page");
     };
@@ -152,6 +171,61 @@ const Home = () => {
                     </div>
                 </div>
             </div>
+
+
+            <div className="container mx-auto py-10 px-4">
+            <h2 className="text-4xl font-bold text-center mb-8">Tourism and Travel Guide</h2>
+            <Tabs>
+                <TabList className="flex justify-center gap-8 text-lg font-semibold">
+                    <Tab className="cursor-pointer px-4 py-2 hover:text-blue-600">Our Packages</Tab>
+                    <Tab className="cursor-pointer px-4 py-2 hover:text-blue-600">Meet Our Tour Guides</Tab>
+                </TabList>
+
+                {/* Our Packages Tab */}
+                <TabPanel>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        {packages.map((pkg) => (
+                            <div key={pkg._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
+                                <img src={pkg.photo} alt={pkg.tripTitle} className="w-full h-48 object-cover" />
+                                <div className="p-4">
+                                    <h3 className="text-xl font-semibold">{pkg.tripTitle}</h3>
+                                    <p className="text-gray-600">{pkg.tourType}</p>
+                                    <p className="text-lg font-bold text-blue-500">${pkg.price}</p>
+                                    <button
+                                        onClick={() => window.location.href = `/package-details/${pkg._id}`}
+                                        className="btn btn-primary mt-4"
+                                    >
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </TabPanel>
+
+                {/* Meet Our Tour Guides Tab */}
+                <TabPanel>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                        {guides.map((guide) => (
+                            <div key={guide._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
+                                <img src={guide.profilePicture} alt={guide.name} className="w-full h-48 object-cover" />
+                                <div className="p-4">
+                                    <h3 className="text-xl font-semibold">{guide.name}</h3>
+                                    <p className="text-gray-600">Expertise: {guide.expertise}</p>
+                                    <button
+                                        onClick={() => window.location.href = `/guide-details/${guide._id}`}
+                                        className="btn btn-primary mt-4"
+                                    >
+                                        View Profile
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </TabPanel>
+            </Tabs>
+        </div>
+
         </div>
     );
 };
