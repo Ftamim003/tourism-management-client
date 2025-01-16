@@ -40,6 +40,7 @@ const Navbar = () => {
                                 } */}
 
                                 <li><NavLink to='/aboutUs'>About Us</NavLink></li>
+                                <li><NavLink to='/trips'> Trips</NavLink></li>
 
                             </ul>
                         </div>
@@ -55,7 +56,7 @@ const Navbar = () => {
                     <div className="navbar-center hidden md:flex">
                         <ul className="menu menu-horizontal px-1 text-lg">
                             <li ><NavLink to='/'> Home </NavLink></li>
-                            <li><NavLink to='/allRooms'>All Rooms </NavLink></li>
+                            <li><NavLink to='/community'>Community </NavLink></li>
                             <li><NavLink to='/login'>Login </NavLink></li>
                             {/* {
                                 user && <>
@@ -63,8 +64,9 @@ const Navbar = () => {
 
                                 </>
                             } */}
-
+                         
                             <li><NavLink to='/aboutUs'>About Us</NavLink></li>
+                            <li><NavLink to='/trips'> Trips</NavLink></li>
 
 
                         </ul>
