@@ -5,6 +5,7 @@ import AUthContext from "../../Context/AUthContext";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 const PackageDetails = () => {
     const { price, title, images, description, tourPlan ,_id} = useLoaderData();
@@ -46,10 +47,10 @@ const PackageDetails = () => {
         };
 
         // Confirm booking and redirect to My Bookings
-        axios.post('/bookings', bookingInfo)
+        axiosPublic.post('/bookings', bookingInfo)
             .then(() => {
                 alert('Confirm your Booking');
-                navigate('/my-bookings');
+               // navigate('/my-bookings');
             })
             .catch(error => console.error('Error booking package:', error));
     };
