@@ -11,12 +11,14 @@ import { TabList, TabPanel, Tabs, Tab } from "react-tabs";
 import TouristStory from "./TouristStory";
 import Events from "./Events";
 import PopularDestination from "./PopularDestination";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
     const axiosPublic = useAxiosPublic();
     const [packages, setPackages] = useState([]);
     const [guides, setGuides] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axiosPublic.get('/random-packages')
@@ -189,13 +191,14 @@ const Home = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
                             {packages.map((pkg) => (
                                 <div key={pkg._id} className="card bg-white shadow-lg rounded-lg overflow-hidden">
-                                    <img src={pkg.photo} alt={pkg.tripTitle} className="w-full h-48 object-cover" />
+                                    <img src={pkg.images?.[0] || 'https://via.placeholder.com/300x200'} // Fallback to a placeholder
+                                        alt={pkg.title} className="w-full h-48 object-cover" />
                                     <div className="p-4">
                                         <h3 className="text-xl font-semibold">{pkg.title}</h3>
                                         <p className="text-gray-600">{pkg.type}</p>
                                         <p className="text-lg font-bold text-blue-500">${pkg.price}</p>
                                         <button
-                                            onClick={() => window.location.href = `/package-details/${pkg._id}`}
+                                            onClick={() =>  navigate(`/packages/${pkg._id}`)}
                                             className="btn btn-primary mt-4"
                                         >
                                             View Details
