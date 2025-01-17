@@ -6,6 +6,7 @@ import useInfo from "../../Components/Hooks/useInfo";
 
 const Dashboard = () => {
     const [bookings]=useInfo();
+    const isAdmin=true
     return (
         <div>
             
@@ -13,6 +14,7 @@ const Dashboard = () => {
                 <div className="w-64 min-h-screen bg-blue-500">
                     <ul className="menu p-3">
                        
+                   {isAdmin ? <>
                     <li><NavLink to='/dashboard/adminHome'>
                                 <FaHome></FaHome>
                                 Admin Home</NavLink></li>
@@ -33,14 +35,8 @@ const Dashboard = () => {
                                 
                                 All Users</NavLink>
                             </li>
-
-                           
-
-
-
-
-
-                       <li>
+                   </> : <>
+                   <li>
                             
                             <NavLink to='/dashboard/profile'><FaBook></FaBook> Manage Profile </NavLink>
                         </li>
@@ -60,6 +56,15 @@ const Dashboard = () => {
                             
                             <NavLink to='/dashboard/userHome'><FaHome></FaHome>Join as tour guide </NavLink>
                         </li>
+                   </>}
+
+                           
+
+
+
+
+
+                      
                         <div className="divider"></div>
                         <li>
                             

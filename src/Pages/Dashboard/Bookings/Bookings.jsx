@@ -1,11 +1,38 @@
 import { FaTrashAlt } from "react-icons/fa";
 import useInfo from "../../../Components/Hooks/useInfo";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 
 const Bookings = () => {
-    const [bookings] = useInfo();
+    const [bookings,refetch] = useInfo();
     const totalPrice = bookings.reduce((total, book) => total + book.price, 0)
-    const handleDelete=id=>{
-
+    const axiosSecure=useAxiosSecure();
+    const handleDelete=(id)=>{
+              
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              axiosSecure.delete(`/bookings/${id}`)
+              .then(res=>{
+                //console.log(res)
+                 if(res.data.deletedCount>0){
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                      });
+                 }
+              })
+            }
+          });
     }
     return (
         <div className="p-5">

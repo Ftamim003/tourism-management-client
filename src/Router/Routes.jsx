@@ -15,6 +15,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Bookings from "../Pages/Dashboard/Bookings/Bookings";
 import ManageProfile from "../Pages/Dashboard/ManageProfile/ManageProfile";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 
 
 export  const router = createBrowserRouter([
@@ -51,15 +52,12 @@ export  const router = createBrowserRouter([
             path:'signup',
             element:<SignUp></SignUp>
         },
-        {
-          path:'dashboard',
-          element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        }
+        
       ]
     },
     {
       path:'dashboard',
-      element:<Dashboard></Dashboard>,
+      element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       children:[
         {
           path: 'bookings',
@@ -68,6 +66,13 @@ export  const router = createBrowserRouter([
         {
           path: 'profile',
           element:<ManageProfile></ManageProfile>
+        },
+
+       // Admin Routes
+        {
+
+          path:'users',
+          element:<AllUsers></AllUsers>
         }
 
       ]

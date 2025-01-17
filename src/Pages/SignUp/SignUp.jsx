@@ -5,11 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 //import { toast } from "react-toastify";
 //import Swal from "sweetalert2";
 import AUthContext from "../../Context/AUthContext";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
+import useInfo from "../../Components/Hooks/useInfo";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-
+   const axiosPublic=useAxiosPublic();
     const { setUser, createUser, updateProfileUser, googleSignIn } = useContext(AUthContext);
-     
+     const [,refetch]=useInfo();
     const navigate = useNavigate();
     const [error, setError] = useState({});
 
@@ -46,15 +49,26 @@ const SignUp = () => {
                 setUser(user)
                 updateProfileUser({ displayName: name, photoURL: photo })
                     .then(() => {
-
-                        navigate("/");
-                        // Swal.fire({
-                        //     icon: "success",
-                        //     title: "Login Successful",
-                        //     text: `Welcome, ${user.displayName || "User"}!`,
-                        //     timer: 3000,
-                        //     showConfirmButton: false,
-                        // });
+                        //keep the user info in the database
+                        const userInfo={
+                            name: name,
+                            email:email
+                        }
+                       axiosPublic.post('/users',userInfo)
+                       .then(res=>{
+                        if(res.data.insertedId){
+                            Swal.fire({
+                                icon: "success",
+                                title: "Login Successful",
+                                text: `Welcome, ${user.displayName || "User"}!`,
+                                timer: 3000,
+                                showConfirmButton: false,
+                            });
+                            navigate("/");
+                        }
+                       })
+                        
+                        
                     })
 
             })
@@ -68,8 +82,16 @@ const SignUp = () => {
 
     const handleGoogleSignIn = () => {
         googleSignIn()
-            .then(() => {
-                navigate("/");
+        .then((result) => {
+                const userInfo = {
+                    email:result.user?.email,
+                    name:result.user?.displayName,
+                }
+                axiosPublic.post('/users',userInfo)
+                .then(res=>{
+                    console.log(res.data)
+                    navigate('/')
+                })
             })
     }
 

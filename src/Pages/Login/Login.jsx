@@ -2,12 +2,14 @@ import { useContext, useState } from "react";
 import AUthContext from "../../Context/AUthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 
 
 const Login = () => {
     const {userLogin,setUser,googleSignIn}=useContext(AUthContext);
     const [error, setError] = useState({});
-    const [email, setEmail] = useState("")
+    const [email, setEmail] = useState("");
+    const axiosPublic=useAxiosPublic();
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -44,8 +46,15 @@ const Login = () => {
 
     const handleGoogleSignIn=()=>{
         googleSignIn()
-        .then(()=>{
-            const redirectPath =  location.state?.from ||  "/";
+        .then((result)=>{
+            const userInfo = {
+                email:result.user?.email,
+                name:result.user?.displayName,
+            }
+            axiosPublic.post('/users',userInfo)
+            .then(res=>{
+                console.log(res.data)
+                const redirectPath =  location.state?.from ||  "/";
                 navigate(redirectPath);
                 Swal.fire({
                     icon: "success",
@@ -53,6 +62,8 @@ const Login = () => {
                     timer: 3000,
                     showConfirmButton: false,
                 });
+            })
+            
         })
     }
 
