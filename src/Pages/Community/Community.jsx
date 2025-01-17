@@ -20,9 +20,7 @@ const Community = () => {
         }
     };
 
-    const handleAllStories = () => {
-        navigate("/all-stories"); // Redirect to All Stories page
-    };
+   
 
     const handleAddStories = () => {
         navigate("/add-story"); // Redirect to Add Stories page
@@ -57,7 +55,7 @@ const Community = () => {
                     ))}
                 </div>
                 <div className="flex justify-center mt-8 space-x-4">
-                    <button onClick={handleAllStories} className="btn btn-info px-6 py-2">All Stories</button>
+                    
                     <button onClick={handleAddStories} className="btn btn-success px-6 py-2">Add Story</button>
                 </div>
             </div>

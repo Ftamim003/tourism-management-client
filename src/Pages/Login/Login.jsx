@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import AUthContext from "../../Context/AUthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
@@ -20,7 +21,6 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 setUser(user)
-                
                 const redirectPath =  location.state?.from || "/";
                 navigate(redirectPath);
                 Swal.fire({
@@ -30,6 +30,7 @@ const Login = () => {
                     timer: 3000,
                     showConfirmButton: false,
                 });
+                
             })
             .catch((err) => {
                 setError({ ...error, login: err.code })

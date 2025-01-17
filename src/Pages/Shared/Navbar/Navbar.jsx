@@ -57,7 +57,7 @@ const Navbar = () => {
                         <ul className="menu menu-horizontal px-1 text-lg">
                             <li ><NavLink to='/'> Home </NavLink></li>
                             <li><NavLink to='/community'>Community </NavLink></li>
-                            <li><NavLink to='/login'>Login </NavLink></li>
+                            
                             {/* {
                                 user && <>
                                     <li><NavLink to='/my-bookings'> My Bookings  </NavLink></li>
@@ -101,6 +101,7 @@ const Navbar = () => {
                                     <li>
                                         <span className="font-bold">Hello, {user.displayName}</span>
                                     </li>
+                                    <li><NavLink to='/dashboard/bookings'> Dashboard</NavLink></li>
 
                                     <li>
                                         <button onClick={handleLogout} className="text-red-600">

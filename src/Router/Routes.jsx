@@ -11,6 +11,10 @@ import PackageDetails from "../Pages/Home/PackageDetails";
 import Community from "../Pages/Community/Community";
 import AboutUs from "../Pages/AboutUs/AboutUs";
 import AllTrips from "../Pages/AllTrips/AllTrips";
+import Dashboard from "../Pages/Dashboard/Dashboard";
+import PrivateRoute from "./PrivateRoute";
+import Bookings from "../Pages/Dashboard/Bookings/Bookings";
+import ManageProfile from "../Pages/Dashboard/ManageProfile/ManageProfile";
 
 
 export  const router = createBrowserRouter([
@@ -46,7 +50,26 @@ export  const router = createBrowserRouter([
         {
             path:'signup',
             element:<SignUp></SignUp>
+        },
+        {
+          path:'dashboard',
+          element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         }
       ]
     },
+    {
+      path:'dashboard',
+      element:<Dashboard></Dashboard>,
+      children:[
+        {
+          path: 'bookings',
+          element:<Bookings></Bookings>
+        },
+        {
+          path: 'profile',
+          element:<ManageProfile></ManageProfile>
+        }
+
+      ]
+    }
   ]);

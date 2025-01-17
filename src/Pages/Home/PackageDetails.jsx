@@ -1,44 +1,49 @@
 import { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import AUthContext from "../../Context/AUthContext";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from "axios";
+import useBookingInfo from "../../Components/Hooks/useInfo";
+import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
+
 
 const PackageDetails = () => {
     const { price, title, images, description, tourPlan ,_id} = useLoaderData();
     const [activeDay, setActiveDay] = useState(null)
-
+    const { user } = useContext(AUthContext);
     const [tourGuides, setTourGuides] = useState([]);
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure=useAxiosSecure();
+    const location=useLocation();
+    const navigate=useNavigate();
+    const [,refetch]=useBookingInfo();
     const [bookingData, setBookingData] = useState({
         tourDate: null,
         guideName: '',
     });
-    const { user } = useContext(AUthContext);
+    
     const toggleDay = (index) => {
         setActiveDay(activeDay === index ? null : index);
     };
 
     useEffect(() => {
-        axiosPublic.get('/tour-guides')
+        axiosSecure.get('/tour-guides')
             .then(response => setTourGuides(response.data))
             .catch(error => console.error('Error fetching tour guides:', error));
     }, [])
 
     const handleBooking = () => {
         if (!user) {
-            navigate('/login'); // Redirect to login if user is not logged in
-            return;
+            return  navigate('/login', {state:{ from: location.pathname }}); // Redirect to login if user is not logged in
+            
         }
 
         const bookingInfo = {
             packageId: _id,
             packageName: title,
             touristName: user?.displayName,
-            touristEmail: user?.email,
+            email: user?.email,
             touristImage: user?.photoURL,
             price: price,
             tourDate: bookingData.tourDate,
@@ -47,9 +52,10 @@ const PackageDetails = () => {
         };
 
         // Confirm booking and redirect to My Bookings
-        axiosPublic.post('/bookings', bookingInfo)
+        axiosSecure.post('/bookings', bookingInfo)
             .then(() => {
                 alert('Confirm your Booking');
+                refetch();
                // navigate('/my-bookings');
             })
             .catch(error => console.error('Error booking package:', error));
