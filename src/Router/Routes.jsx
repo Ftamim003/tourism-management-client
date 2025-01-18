@@ -17,6 +17,8 @@ import Bookings from "../Pages/Dashboard/Bookings/Bookings";
 import ManageProfile from "../Pages/Dashboard/ManageProfile/ManageProfile";
 import AllUsers from "../Pages/Dashboard/AllUsers";
 import AddPackageForm from "../Pages/Dashboard/AddPackage/AddPackageForm";
+import AdminRoute from "./AdminRoute";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 
 export  const router = createBrowserRouter([
@@ -68,16 +70,21 @@ export  const router = createBrowserRouter([
           path: 'profile',
           element:<ManageProfile></ManageProfile>
         },
+        {
+            path:'payment/:id',
+            element:<Payment></Payment>,
+            loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
+        },
 
        // Admin Routes
        {
          path:'addPackage',
-         element:<AddPackageForm></AddPackageForm>
+         element:<AdminRoute><AddPackageForm></AddPackageForm></AdminRoute>
        },
         {
 
           path:'users',
-          element:<AllUsers></AllUsers>
+          element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
         }
 
       ]

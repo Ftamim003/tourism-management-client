@@ -23,7 +23,10 @@ const AddPackageForm = () => {
     // Handle input change
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name === "price" ? parseFloat(value) : value, // Convert 'price' to a number
+        }));;
     };
 
     // Handle dynamic changes (e.g., images, tourPlan)
@@ -53,7 +56,7 @@ const AddPackageForm = () => {
             return { ...prev, tourPlan: updatedTourPlan };
         });
     };
-    
+
     const addActivity = (planIndex) => {
         setFormData((prev) => {
             const updatedTourPlan = [...prev.tourPlan];
