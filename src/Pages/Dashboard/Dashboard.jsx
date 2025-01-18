@@ -2,11 +2,13 @@ import { NavLink, Outlet } from "react-router-dom";
 
 import { FaBook, FaHome } from "react-icons/fa";
 import useInfo from "../../Components/Hooks/useInfo";
+import useAdmin from "../../Components/Hooks/useAdmin";
 
 
 const Dashboard = () => {
     const [bookings]=useInfo();
-    const isAdmin=true
+    
+    const [isAdmin]=useAdmin();
     return (
         <div>
             
@@ -19,9 +21,9 @@ const Dashboard = () => {
                                 <FaHome></FaHome>
                                 Admin Home</NavLink></li>
 
-                            <li><NavLink to='/dashboard/addItems'>
+                            <li><NavLink to='/dashboard/addPackage'>
                                 
-                                Add Items</NavLink>
+                                Add Package</NavLink>
                             </li>
                             <li><NavLink to='/dashboard/manageItems'>
                                 

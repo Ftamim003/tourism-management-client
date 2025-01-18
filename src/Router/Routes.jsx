@@ -16,6 +16,7 @@ import PrivateRoute from "./PrivateRoute";
 import Bookings from "../Pages/Dashboard/Bookings/Bookings";
 import ManageProfile from "../Pages/Dashboard/ManageProfile/ManageProfile";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import AddPackageForm from "../Pages/Dashboard/AddPackage/AddPackageForm";
 
 
 export  const router = createBrowserRouter([
@@ -69,6 +70,10 @@ export  const router = createBrowserRouter([
         },
 
        // Admin Routes
+       {
+         path:'addPackage',
+         element:<AddPackageForm></AddPackageForm>
+       },
         {
 
           path:'users',
