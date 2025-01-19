@@ -3,10 +3,13 @@ import useBookingInfo from "../../../Components/Hooks/useInfo";
 import { useContext, useState } from "react";
 import AUthContext from "../../../Context/AUthContext";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
+import useAdmin from "../../../Components/Hooks/useAdmin";
 const ManageProfile = () => {
     // Fetch user data (Assuming `useLoaderData` fetches the user info)
-    const {user} = useContext(AUthContext);
-
+    const {user,setUser} = useContext(AUthContext);
+    const [isAdmin]=useAdmin()
+    const axiosSecure=useAxiosSecure();
     // State for modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -22,9 +25,13 @@ const ManageProfile = () => {
                 photo: user.photoURL || "",
             });
            
-            //console.log("Modal should open now");
+            
         } else {
-            //console.log("User data is undefined");
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "User data is not available.",
+            });
         }
     };
 
@@ -37,17 +44,62 @@ const ManageProfile = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSave = () => {
-        // Add logic for saving updated profile data to the server
-        Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Your work has been saved",
-            showConfirmButton: false,
-            timer: 1500
-          });
-        setIsModalOpen(false);
+    
+
+    const handleSave = async () => {
+        if (!user.email) {
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "User email is missing!",
+            });
+            return;
+        }
+        try {
+            const response = await axiosSecure.put(`/update-profile/${user.email}`, formData, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            const result = response.data;
+    
+            if (result.success) {
+                // Update user context
+                setUser((prevUser) => ({
+                    ...prevUser,
+                    displayName: formData.name,
+                    photoURL: formData.photo,
+                }));
+    
+                // Show success message
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Profile updated successfully.",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+    
+                // Close the modal
+                setIsModalOpen(false);
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    title: "Update failed",
+                    text: result.message,
+                });
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "An error occurred while updating your profile.",
+            });
+        }
     };
+    
 
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
@@ -63,7 +115,8 @@ const ManageProfile = () => {
                 />
                 <h3 className="text-xl font-semibold">{user?.displayName}</h3>
                 <p className="text-gray-600">Email: {user?.email}</p>
-                <p className="text-gray-600">Role: User</p>
+                {isAdmin ? <p className="text-gray-600">Role: Admin</p>: <p className="text-gray-600">Role: User</p>}
+                
 
                 {/* Edit Profile Button */}
                 <button

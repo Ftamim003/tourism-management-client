@@ -17,7 +17,7 @@ const Dashboard = () => {
                     <ul className="menu p-3">
                        
                    {isAdmin ? <>
-                    <li><NavLink to='/dashboard/adminHome'>
+                    <li><NavLink to='/dashboard/adminProfile'>
                                 <FaHome></FaHome>
                                 Admin Home</NavLink></li>
 
@@ -56,7 +56,7 @@ const Dashboard = () => {
                         </li>
                         <li>
                             
-                            <NavLink to='/dashboard/userHome'><FaHome></FaHome>Join as tour guide </NavLink>
+                            <NavLink to='/dashboard/guideApplicant'><FaHome></FaHome>Join as tour guide </NavLink>
                         </li>
                    </>}
 

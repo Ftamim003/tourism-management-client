@@ -22,6 +22,8 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import AddStory from "../Pages/Dashboard/AddStory/AddStory";
 import ManageStories from "../Pages/Dashboard/ManageStory/ManageStories";
 import EditStory from "../Pages/Dashboard/EditStory/EditStory";
+import GuideApplication from "../Pages/Dashboard/TourGuideApplication/GuideApplication";
+import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 
 
 export  const router = createBrowserRouter([
@@ -77,6 +79,7 @@ export  const router = createBrowserRouter([
             path:'story',
             element:<AddStory></AddStory>
         },
+
         {
           path:'manageStories',
           element:<ManageStories></ManageStories>
@@ -92,8 +95,17 @@ export  const router = createBrowserRouter([
           element:<EditStory></EditStory>,
           loader:({params})=>fetch(`http://localhost:5000/stories/${params.id}`)
       },
+      {
+         path:"guideApplicant",
+         element:<GuideApplication></GuideApplication>
+      },
+
 
        // Admin Routes
+       {
+           path:'adminProfile',
+           element:<AdminProfile></AdminProfile>
+       },
        {
          path:'addPackage',
          element:<AdminRoute><AddPackageForm></AddPackageForm></AdminRoute>

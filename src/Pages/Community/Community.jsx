@@ -9,7 +9,7 @@ const Community = () => {
     const axiosPublic=useAxiosPublic();
     useEffect(() => {
         // Fetch random stories
-        axiosPublic.get("/stories")
+        axiosPublic.get("/allStories")
             .then(res => setStories(res.data))
             .catch(err => console.error(err));
     }, [axiosPublic]);

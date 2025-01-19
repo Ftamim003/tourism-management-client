@@ -101,7 +101,7 @@ const Navbar = () => {
                                     <li>
                                         <span className="font-bold">Hello, {user.displayName}</span>
                                     </li>
-                                    <li><NavLink to='/dashboard/bookings'> Dashboard</NavLink></li>
+                                    <li><NavLink to='/dashboard/profile'> Dashboard</NavLink></li>
 
                                     <li>
                                         <button onClick={handleLogout} className="text-red-600">
