@@ -19,6 +19,8 @@ import AllUsers from "../Pages/Dashboard/AllUsers";
 import AddPackageForm from "../Pages/Dashboard/AddPackage/AddPackageForm";
 import AdminRoute from "./AdminRoute";
 import Payment from "../Pages/Dashboard/Payment/Payment";
+import AddStory from "../Pages/Dashboard/AddStory/AddStory";
+import ManageStories from "../Pages/Dashboard/ManageStory/ManageStories";
 
 
 export  const router = createBrowserRouter([
@@ -69,6 +71,14 @@ export  const router = createBrowserRouter([
         {
           path: 'profile',
           element:<ManageProfile></ManageProfile>
+        },
+        {
+            path:'story',
+            element:<AddStory></AddStory>
+        },
+        {
+          path:'manageStories',
+          element:<ManageStories></ManageStories>
         },
         {
             path:'payment/:id',

@@ -52,7 +52,8 @@ const SignUp = () => {
                         //keep the user info in the database
                         const userInfo={
                             name: name,
-                            email:email
+                            email:email,
+                            role:'user',
                         }
                        axiosPublic.post('/users',userInfo)
                        .then(res=>{
@@ -86,6 +87,7 @@ const SignUp = () => {
                 const userInfo = {
                     email:result.user?.email,
                     name:result.user?.displayName,
+                    role:'user',
                 }
                 axiosPublic.post('/users',userInfo)
                 .then(res=>{

@@ -2,7 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 
 import Swal from "sweetalert2";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 import useInfo from "../../../Components/Hooks/useInfo";
 import AUthContext from "../../../Context/AUthContext";
@@ -15,6 +15,7 @@ const CheckOutForm = () => {
     const stripe=useStripe();
     const elements=useElements();
     const axiosSecure=useAxiosSecure();
+    const location = useLocation();
     const navigate=useNavigate();
     const {user}=useContext(AUthContext);
     const [bookings,refetch]=useInfo();
@@ -102,7 +103,9 @@ const CheckOutForm = () => {
                         timer: 1500
                       });
                       refetch();
-                      //navigate('/dashboard/paymentHistory')
+
+                      const redirectPath =  location.state?.from ||  "/";
+                      navigate(redirectPath);
                 }
             }
            }
@@ -127,7 +130,7 @@ const CheckOutForm = () => {
                 >
 
                 </CardElement>
-                <button className="btn btn-primary my-5" type="submit" disabled={!stripe || !clientSecret}>
+                <button className="btn bg-blue-500 my-5" type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
                 <p className="text-red-500">

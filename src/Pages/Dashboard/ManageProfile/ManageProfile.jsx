@@ -22,9 +22,9 @@ const ManageProfile = () => {
                 photo: user.photoURL || "",
             });
            
-            console.log("Modal should open now");
+            //console.log("Modal should open now");
         } else {
-            console.log("User data is undefined");
+            //console.log("User data is undefined");
         }
     };
 
@@ -39,7 +39,13 @@ const ManageProfile = () => {
 
     const handleSave = () => {
         // Add logic for saving updated profile data to the server
-        Swal.success("Profile updated successfully!");
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+          });
         setIsModalOpen(false);
     };
 
@@ -57,7 +63,7 @@ const ManageProfile = () => {
                 />
                 <h3 className="text-xl font-semibold">{user?.displayName}</h3>
                 <p className="text-gray-600">Email: {user?.email}</p>
-                <p className="text-gray-600">Role: {user?.role}</p>
+                <p className="text-gray-600">Role: User</p>
 
                 {/* Edit Profile Button */}
                 <button
@@ -120,7 +126,7 @@ const ManageProfile = () => {
                                 <label className="block text-gray-700">Role</label>
                                 <input
                                     type="text"
-                                    value={user?.role}
+                                    value='User'
                                     readOnly
                                     className="w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
                                 />
