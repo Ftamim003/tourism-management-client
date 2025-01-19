@@ -62,7 +62,7 @@ const ManageStories = () => {
 
   return (
     <div className="p-5">
-      <h1 className="text-2xl font-bold mb-5">Manage Stories</h1>
+      <h1 className="text-2xl font-bold mb-5">My Stories</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {stories.map((story) => (
           <div key={story._id} className="card bg-base-100 shadow-md">
@@ -78,7 +78,7 @@ const ManageStories = () => {
               <p>{story.description}</p>
               <div className="flex gap-3 mt-3">
                 <Link
-                  to={`/edit-story/${story._id}`}
+                  to={`/dashboard/edit-story/${story._id}`}
                   className="btn btn-primary btn-sm"
                 >
                   Edit

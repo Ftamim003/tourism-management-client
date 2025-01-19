@@ -21,6 +21,7 @@ import AdminRoute from "./AdminRoute";
 import Payment from "../Pages/Dashboard/Payment/Payment";
 import AddStory from "../Pages/Dashboard/AddStory/AddStory";
 import ManageStories from "../Pages/Dashboard/ManageStory/ManageStories";
+import EditStory from "../Pages/Dashboard/EditStory/EditStory";
 
 
 export  const router = createBrowserRouter([
@@ -85,6 +86,12 @@ export  const router = createBrowserRouter([
             element:<Payment></Payment>,
             loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
         },
+
+        {
+          path:'edit-story/:id',
+          element:<EditStory></EditStory>,
+          loader:({params})=>fetch(`http://localhost:5000/stories/${params.id}`)
+      },
 
        // Admin Routes
        {
