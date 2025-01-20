@@ -24,6 +24,8 @@ import ManageStories from "../Pages/Dashboard/ManageStory/ManageStories";
 import EditStory from "../Pages/Dashboard/EditStory/EditStory";
 import GuideApplication from "../Pages/Dashboard/TourGuideApplication/GuideApplication";
 import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
+import ManageUsers from "../Pages/Dashboard/ManageUser/ManageUsers";
+import ManageCandidates from "../Pages/Dashboard/ManageCandidates/ManageCandidates";
 
 
 export  const router = createBrowserRouter([
@@ -98,6 +100,7 @@ export  const router = createBrowserRouter([
       {
          path:"guideApplicant",
          element:<GuideApplication></GuideApplication>
+         
       },
 
 
@@ -114,6 +117,14 @@ export  const router = createBrowserRouter([
 
           path:'users',
           element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
+        {
+          path:'manageUsers',
+          element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+        },
+        {
+          path:'manageCandidates',
+          element:<AdminRoute><ManageCandidates></ManageCandidates></AdminRoute>
         }
 
       ]

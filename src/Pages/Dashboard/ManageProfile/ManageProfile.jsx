@@ -5,11 +5,13 @@ import AUthContext from "../../../Context/AUthContext";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 import useAdmin from "../../../Components/Hooks/useAdmin";
+import useGuide from "../../../Components/Hooks/useGuide";
 const ManageProfile = () => {
     // Fetch user data (Assuming `useLoaderData` fetches the user info)
-    const {user,setUser} = useContext(AUthContext);
-    const [isAdmin]=useAdmin()
-    const axiosSecure=useAxiosSecure();
+    const { user, setUser } = useContext(AUthContext);
+    const [isAdmin] = useAdmin();
+    const [isGuide] = useGuide()
+    const axiosSecure = useAxiosSecure();
     // State for modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -24,8 +26,8 @@ const ManageProfile = () => {
                 name: user.displayName || "",
                 photo: user.photoURL || "",
             });
-           
-            
+
+
         } else {
             Swal.fire({
                 icon: "error",
@@ -44,7 +46,7 @@ const ManageProfile = () => {
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    
+
 
     const handleSave = async () => {
         if (!user.email) {
@@ -61,9 +63,9 @@ const ManageProfile = () => {
                     "Content-Type": "application/json",
                 },
             });
-    
+
             const result = response.data;
-    
+
             if (result.success) {
                 // Update user context
                 setUser((prevUser) => ({
@@ -71,7 +73,7 @@ const ManageProfile = () => {
                     displayName: formData.name,
                     photoURL: formData.photo,
                 }));
-    
+
                 // Show success message
                 Swal.fire({
                     position: "top-end",
@@ -80,7 +82,7 @@ const ManageProfile = () => {
                     showConfirmButton: false,
                     timer: 1500,
                 });
-    
+
                 // Close the modal
                 setIsModalOpen(false);
             } else {
@@ -99,7 +101,7 @@ const ManageProfile = () => {
             });
         }
     };
-    
+
 
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
@@ -115,8 +117,10 @@ const ManageProfile = () => {
                 />
                 <h3 className="text-xl font-semibold">{user?.displayName}</h3>
                 <p className="text-gray-600">Email: {user?.email}</p>
-                {isAdmin ? <p className="text-gray-600">Role: Admin</p>: <p className="text-gray-600">Role: User</p>}
-                
+                <p className="text-gray-600">
+                    Role: {isAdmin ? "Admin" : isGuide ? "Guide" : "User"}
+                </p>
+
 
                 {/* Edit Profile Button */}
                 <button
@@ -127,12 +131,12 @@ const ManageProfile = () => {
                 </button>
 
                 {/* Apply for Tour Guide Button */}
-                <button
+                {/* <button
                     onClick={() => (window.location.href = "/join-tour-guide")}
                     className="btn btn-secondary mt-4 ml-4"
                 >
                     Apply for Tour Guide
-                </button>
+                </button> */}
             </div>
 
             {/* Edit Profile Modal */}

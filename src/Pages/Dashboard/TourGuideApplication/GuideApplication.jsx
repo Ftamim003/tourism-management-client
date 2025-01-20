@@ -1,15 +1,23 @@
 
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
+import AUthContext from "../../../Context/AUthContext";
+import { useParams } from "react-router-dom";
 
 const GuideApplication = () => {
+    
+    const {user}=useContext(AUthContext);
     const axiosSecure=useAxiosSecure();
     const [formData, setFormData] = useState({
         title: "",
         reason: "",
         cvLink: "",
+        name:user.displayName,
+        email:user.email,
+        role:'user',
+      
     });
 
     const handleChange = (e) => {
@@ -20,15 +28,6 @@ const GuideApplication = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        //if (!formData.title || !formData.reason || !formData.cvLink)
-
-        // setFormData({
-        //     title: "",
-        //     reason: "",
-        //     cvLink: "",
-        // });
-
-        // Validation check (optional)
         try {
             // Post the formData to your backend API
             const response = await axiosSecure.post("/guideApplication", formData);
