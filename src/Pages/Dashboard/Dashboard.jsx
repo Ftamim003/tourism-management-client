@@ -13,15 +13,14 @@ const Dashboard = () => {
 
     const [isGuide] = useGuide();
     return (
-        <div>
             <div className="flex">
-                <div className="w-40 md:w-64 min-h-screen bg-blue-500">
-                    <ul className="menu p-3">
+                <div className=" md:w-64 min-h-screen bg-blue-500">
+                    <ul className="menu ">
                         {isAdmin ? (
                             <>
                                 <li>
                                     <NavLink to="/dashboard/adminProfile">
-                                        <FaHome />
+                                       
                                         Admin Home
                                     </NavLink>
                                 </li>
@@ -42,25 +41,25 @@ const Dashboard = () => {
                             <>
                                 <li>
                                     <NavLink to="/dashboard/profile">
-                                        <FaBook />
+                                      
                                          Profile
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/myAssignedTours">
-                                        <FaBook />
+                                       
                                         My Assigned Tours
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/manageStories">
-                                        <FaHome />
+                                      
                                         Manage Stories
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/story">
-                                        <FaHome />
+                                        
                                         Add Stories
                                     </NavLink>
                                 </li>
@@ -69,31 +68,31 @@ const Dashboard = () => {
                             <>
                                 <li>
                                     <NavLink to="/dashboard/profile">
-                                        <FaBook />
+                                        
                                         Manage Profile
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/bookings">
-                                        <FaBook />
+                                      
                                         My Bookings ({bookings.length})
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/manageStories">
-                                        <FaHome />
+                                       
                                         Manage Stories
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/story">
-                                        <FaHome />
+                                       
                                         Add Stories
                                     </NavLink>
                                 </li>
                                 <li>
                                     <NavLink to="/dashboard/guideApplicant">
-                                        <FaHome />
+                                       
                                         Join as Tour Guide
                                     </NavLink>
                                 </li>
@@ -109,11 +108,11 @@ const Dashboard = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 overflow-x-auto">
                     <Outlet />
                 </div>
             </div>
-        </div>
+        
     );
 };
 

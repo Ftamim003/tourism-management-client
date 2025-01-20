@@ -14,6 +14,7 @@ const GuideApplication = () => {
         title: "",
         reason: "",
         cvLink: "",
+        profilePicture:user.photoURL,
         name:user.displayName,
         email:user.email,
         role:'user',
@@ -33,14 +34,20 @@ const GuideApplication = () => {
             const response = await axiosSecure.post("/guideApplication", formData);
 
             if (response.status === 201 || response.status === 200) {
+                const tourGuidesResponse = await axiosSecure.post("/tour-guides", formData);
+
+                 if (tourGuidesResponse.status === 201 || tourGuidesResponse.status === 200) {
                 Swal.fire("Success", "Application Sent!", "success");
 
-                //Reset the form after successful submission
+                // Reset the form after successful submission
                 setFormData({
                     title: "",
                     reason: "",
                     cvLink: "",
                 });
+            } else {
+                Swal.fire("Error", "Application submitted, but failed to add guide.", "error");
+            }
             } else {
                 Swal.fire("Error", "Failed to add package", "error");
             }

@@ -74,26 +74,27 @@ const MyAssignedTours = () => {
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">My Assigned Tours</h1>
             {tours.length > 0 ? (
+            <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-200">
                     <thead>
                         <tr className="bg-gray-100">
-                            <th className="px-4 py-2">Package Name</th>
-                            <th className="px-4 py-2">Tourist Name</th>
-                            <th className="px-4 py-2">Tour Date</th>
-                            <th className="px-4 py-2">Price</th>
-                            <th className="px-4 py-2">Status</th>
-                            <th className="px-4 py-2">Actions</th>
+                            <th className="px-4 py-2 text-sm">Package Name</th>
+                            <th className="px-4 py-2 text-sm">Tourist Name</th>
+                            <th className="px-4 py-2 text-sm">Tour Date</th>
+                            <th className="px-4 py-2 text-sm hidden sm:table-cell">Price</th>
+                            <th className="px-4 py-2 text-sm">Status</th>
+                            <th className="px-4 py-2 text-sm">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {tours.map((tour) => (
                             <tr key={tour._id} className="border-t">
-                                <td className="px-4 py-2">{tour.packageName}</td>
-                                <td className="px-4 py-2">{tour.touristName}</td>
-                                <td className="px-4 py-2">{new Date(tour.tourDate).toLocaleDateString()}</td>
-                                <td className="px-4 py-2">{tour.price}</td>
-                                <td className="px-4 py-2 capitalize">{tour.status}</td>
-                                <td className="px-4 py-2 space-x-2">
+                                <td className="px-4 py-2 text-sm">{tour.packageName}</td>
+                                <td className="px-4 py-2 text-sm">{tour.touristName}</td>
+                                <td className="px-4 py-2 text-sm">{new Date(tour.tourDate).toLocaleDateString()}</td>
+                                <td className="px-4 py-2 text-sm hidden sm:table-cell">{tour.price}</td>
+                                <td className="px-4 py-2 text-sm capitalize">{tour.status}</td>
+                                <td className="px-4 py-2 text-sm space-x-2">
                                     <button
                                         className="px-4 py-2 bg-green-500 text-white rounded-md disabled:bg-gray-300"
                                         disabled={tour.status !== "in review"}
@@ -112,6 +113,7 @@ const MyAssignedTours = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
             ) : (
                 <p>No assigned tours available.</p>
             )}

@@ -8,7 +8,7 @@ const Payment = () => {
     const { id } = useParams();
     return (
         <div>
-            <div className="p-28">
+            <div className="py-2">
                 <Elements stripe={stripePromise}>
                   <CheckOutForm id={id}></CheckOutForm>
                 </Elements>

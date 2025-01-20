@@ -144,7 +144,7 @@ const SignUp = () => {
                         <button className="btn bg-[#1C3D5A] text-white hover:bg-[#265885] transition-colors duration-300">Register</button>
                     </div>
                 </form>
-                <p className="text-center font-semibold"> Already have an account? <Link className="text-blue-500" to='/auth/login'>Login</Link></p>
+                <p className="text-center font-semibold"> Already have an account? <Link className="text-blue-500" to='/login'>Login</Link></p>
                 <div className="*:w-full mt-5">
                     <button onClick={handleGoogleSignIn} className="btn text-[#1C3D5A]">
                         Login with Google

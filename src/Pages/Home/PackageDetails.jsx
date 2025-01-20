@@ -7,6 +7,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useBookingInfo from "../../Components/Hooks/useInfo";
 import useAxiosSecure from "../../Components/Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const PackageDetails = () => {
@@ -54,9 +55,15 @@ const PackageDetails = () => {
         // Confirm booking and redirect to My Bookings
         axiosSecure.post('/bookings', bookingInfo)
             .then(() => {
-                alert('Confirm your Booking');
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `Booking to the confirm`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 refetch();
-               // navigate('/my-bookings');
+                navigate('/dashboard/bookings');
             })
             .catch(error => console.error('Error booking package:', error));
     };

@@ -136,42 +136,49 @@ const Home = () => {
                             Explore what our website has to offer through an engaging video experience.
                         </p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Video 1 */}
-                        <div className="relative overflow-hidden rounded-lg shadow-lg">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8 }}
-                                viewport={{ once: true }}
-                                className="relative overflow-hidden rounded-lg shadow-lg"
-                            >
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/j5L1M7rDbL0?si=iZ6KtggUq1ptmn7y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2">
-                                    <h3 className="text-lg font-semibold">Scenic Beauti of Bandarban</h3>
-                                </div>
-                            </motion.div>
-                        </div>
+                    <div className="container mx-auto px-4 sm:px-6 py-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {/* Video 1 */}
+                            <div className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.8 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <iframe
+                                        className="w-full h-64 md:h-72 lg:h-80"
+                                        src="https://www.youtube.com/embed/j5L1M7rDbL0?si=iZ6KtggUq1ptmn7y"
+                                        title="Scenic Beauti of Bandarban"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerPolicy="strict-origin-when-cross-origin"
+                                        allowFullScreen
+                                    ></iframe>
+                                    
+                                </motion.div>
+                            </div>
 
-                        {/* Video 2 */}
-                        <div className="relative overflow-hidden rounded-lg shadow-lg">
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.8 }}
-                                viewport={{ once: true }}
-                                className="relative overflow-hidden rounded-lg shadow-lg"
-                            >
-                                <div>
-                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/yzASVQShs6I?si=tAmBmsmcACAPbQvR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                                    </iframe>
-                                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center py-2">
-                                        <h3 className="text-lg font-semibold">Beautiful Cox's Bazar Guide</h3>
-                                    </div>
-
-                                </div>
-
-                            </motion.div>
+                            {/* Video 2 */}
+                            <div className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.8 }}
+                                    viewport={{ once: true }}
+                                >
+                                    <iframe
+                                        className="w-full h-64 md:h-72 lg:h-80"
+                                        src="https://www.youtube.com/embed/yzASVQShs6I?si=tAmBmsmcACAPbQvR"
+                                        title="Beautiful Cox's Bazar Guide"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerPolicy="strict-origin-when-cross-origin"
+                                        allowFullScreen
+                                    ></iframe>
+                                    
+                                </motion.div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -198,7 +205,7 @@ const Home = () => {
                                         <p className="text-gray-600">{pkg.type}</p>
                                         <p className="text-lg font-bold text-blue-500">${pkg.price}</p>
                                         <button
-                                            onClick={() =>  navigate(`/packages/${pkg._id}`)}
+                                            onClick={() => navigate(`/packages/${pkg._id}`)}
                                             className="btn btn-primary mt-4"
                                         >
                                             View Details

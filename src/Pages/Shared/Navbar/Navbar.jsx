@@ -43,7 +43,7 @@ const Navbar = () => {
                             <div className="flex items-center w-72">
 
                                 <h1 className="font-bold text-2xl text-[#1C3D5A] hidden md:block"><NavLink to='/'>
-                                    GetawayInn  </NavLink> </h1>
+                                TravelMint  </NavLink> </h1>
                                 <div className="text-center mt-5 ">
                                 </div>
 

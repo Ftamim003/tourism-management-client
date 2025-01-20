@@ -16,7 +16,7 @@ const TourGuideProfile = () =>{
         const fetchGuideDetails = async () => {
             try {
                 setLoading(true);
-                const response = await axiosSecure.get(`http://localhost:5000/tourGuide/${id}`);
+                const response = await axiosSecure.get(`https://tourism-management-server-eight-woad.vercel.app/tourGuide/${id}`);
                 setGuide(response.data.guide);
                 setStories(response.data.stories);
             } catch (err) {

@@ -37,74 +37,60 @@ const Bookings = () => {
     }
     return (
         <div className="p-5">
-            <div className="p-3 flex justify-evenly">
-                <h2 className="text-3xl">My Bookings {bookings.length}</h2>
-                <h2 className="text-3xl">Total Price {totalPrice}</h2>
-                
-            </div>
-
-            <div>
-                <div className="overflow-x-auto">
-                    <table className="table">
-                        {/* head */}
-                        <thead>
-                            <tr>
-                                <th>
-                                    #
-                                </th>
-                                <th>Package Name</th>
-                                <th>Guide Name</th>
-                                <th>Tour date</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Pay</th>
-                                
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {bookings.map((book, index) => <tr key={book._id}>
-                                <th>
-                                    {index + 1}
-                                </th>
-                                <td>
-                                    {book.packageName}
-                                </td>
-                                <td>
-                                    {book.guideName}
-
-                                </td>
-                                <td>{book.tourDate}</td>
-                                <td>{book.price}</td>
-                                <td>{book.status}</td>
-                                <th>
-                                    {book.status === "pending" ? (
-                                        <>
-                                            <Link to={`/dashboard/payment/${book._id}`}>
-                                                <button className="btn btn-ghost btn-xs">Pay</button>
-                                            </Link>
-                                            <button
-                                                onClick={() => handleDelete(book._id)}
-                                                className="text-red-500 btn btn-ghost btn-xs ml-2"
-                                            >
-                                                Cancel
-                                            </button>
-                                        </>
-                                    ) : (
-                                        <span className="text-gray-500">Payed</span>
-                                    )}
-                                </th>
-                            </tr>)
-                            }
-
-
-                        </tbody>
-
-
-                    </table>
-                </div>
-            </div>
+        <div className="p-3 flex justify-evenly">
+            <h2 className="text-lg md:text-3xl">My Bookings ({bookings.length})</h2>
+            <h2 className="text-lg md:text-3xl">Total Price: {totalPrice}</h2>
         </div>
+
+        {/* Responsive Table Wrapper */}
+        <div className="overflow-x-auto">
+            <table className="table-auto min-w-full bg-white border border-gray-200">
+                {/* Table Head */}
+                <thead>
+                    <tr className="bg-gray-100">
+                        <th className="px-4 py-2">#</th>
+                        <th className="px-4 py-2">Package Name</th>
+                        <th className="px-4 py-2">Guide Name</th>
+                        <th className="px-4 py-2">Tour Date</th>
+                        <th className="px-4 py-2">Price</th>
+                        <th className="px-4 py-2">Status</th>
+                        <th className="px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+
+                {/* Table Body */}
+                <tbody>
+                    {bookings.map((book, index) => (
+                        <tr key={book._id} className="border-t">
+                            <td className="px-4 py-2">{index + 1}</td>
+                            <td className="px-4 py-2 truncate">{book.packageName}</td>
+                            <td className="px-4 py-2">{book.guideName}</td>
+                            <td className="px-4 py-2">{new Date(book.tourDate).toLocaleDateString()}</td>
+                            <td className="px-4 py-2">{book.price}</td>
+                            <td className="px-4 py-2 capitalize">{book.status}</td>
+                            <td className="px-4 py-2 space-x-2">
+                                {book.status === "pending" ? (
+                                    <>
+                                        <Link to={`/dashboard/payment/${book._id}`}>
+                                            <button className="btn btn-ghost btn-xs">Pay</button>
+                                        </Link>
+                                        <button
+                                            onClick={() => handleDelete(book._id)}
+                                            className="text-red-500 btn btn-ghost btn-xs ml-2"
+                                        >
+                                            Cancel
+                                        </button>
+                                    </>
+                                ) : (
+                                    <span className="text-gray-500">Paid</span>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </div>
     );
 };
 

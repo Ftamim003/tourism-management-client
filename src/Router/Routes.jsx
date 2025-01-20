@@ -42,7 +42,7 @@ export  const router = createBrowserRouter([
         {
           path:'/packages/:id',
           element:<PackageDetails></PackageDetails>,
-          loader:({params})=>fetch(`http://localhost:5000/packages/${params.id}`)
+          loader:({params})=>fetch(`https://tourism-management-server-eight-woad.vercel.app/packages/${params.id}`)
         },
         {
         path:'community',
@@ -59,7 +59,7 @@ export  const router = createBrowserRouter([
         { 
           path:'tourGuide/:id',
           element:<TourGuideProfile></TourGuideProfile>,
-          loader:({params})=>fetch(`http://localhost:5000/tourGuide/${params.id}`)
+          loader:({params})=>fetch(`https://tourism-management-server-eight-woad.vercel.app/tourGuide/${params.id}`)
 
         },
         {
@@ -102,13 +102,13 @@ export  const router = createBrowserRouter([
         {
             path:'payment/:id',
             element:<Payment></Payment>,
-            loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
+            loader:({params})=>fetch(`https://tourism-management-server-eight-woad.vercel.app/payment/${params.id}`)
         },
 
         {
           path:'edit-story/:id',
           element:<EditStory></EditStory>,
-          loader:({params})=>fetch(`http://localhost:5000/stories/${params.id}`)
+          loader:({params})=>fetch(`https://tourism-management-server-eight-woad.vercel.app/stories/${params.id}`)
       },
       {
          path:"guideApplicant",
@@ -120,7 +120,7 @@ export  const router = createBrowserRouter([
        // Admin Routes
        {
            path:'adminProfile',
-           element:<AdminProfile></AdminProfile>
+           element:<AdminRoute><AdminProfile></AdminProfile></AdminRoute>
        },
        {
          path:'addPackage',

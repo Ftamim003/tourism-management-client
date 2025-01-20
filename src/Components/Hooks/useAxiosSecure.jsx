@@ -5,7 +5,7 @@ import AUthContext from "../../Context/AUthContext";
 
 
 const axiosSecure= axios.create({
-    baseURL:'http://localhost:5000',
+    baseURL:'https://tourism-management-server-eight-woad.vercel.app',
 })
 
 const useAxiosSecure = () => {

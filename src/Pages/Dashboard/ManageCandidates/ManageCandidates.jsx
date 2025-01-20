@@ -109,7 +109,7 @@ const ManageCandidates = () => {
 
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
-    <h2 className="text-2xl font-bold mb-6">Manage Candidates</h2>
+    <h2 className="text-lg md:text-2xl font-bold mb-6">Manage Candidates</h2>
     {isLoading ? (
         <p>Loading applications...</p>
     ) : isError ? (
