@@ -1,9 +1,9 @@
 # Tourism Management System  
 
-**Admin Username**: admin@tourism.com  
-**Admin Password**: admin123  
+**Admin email**: tamim5@gmail.com
+**Admin Password**: Ab12345@
 
-**Live Site URL**: [Tourism Management System](https://tourism-management-live-site-url.com)  
+**Live Site URL**: [Tourism Management System](https://tourism-management-33867.web.app/)  
 
 ---
 
@@ -47,16 +47,6 @@
     - Backend built with Node.js and MongoDB for efficient data management.  
     - Frontend developed with ReactJS for a dynamic and seamless experience.  
 
----
-
-## How to Access the Admin Panel  
-
-1. Visit the live site URL: [Tourism Management System](https://tourism-management-live-site-url.com).  
-2. Log in with the admin credentials provided:  
-   - **Username**: admin@tourism.com  
-   - **Password**: admin123  
-
----
 
 ## Technologies Used  
 
