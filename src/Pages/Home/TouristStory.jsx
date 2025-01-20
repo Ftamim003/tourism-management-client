@@ -22,11 +22,11 @@ const TouristStory = () => {
     };
 
     const handleAllStories = () => {
-        navigate("/all-stories"); // Redirect to All Stories page
+        navigate("/community"); // Redirect to All Stories page
     };
 
     const handleAddStories = () => {
-        navigate("/add-story"); // Redirect to Add Stories page
+        navigate("dashboard/story"); // Redirect to Add Stories page
     };
 
     return (
@@ -47,12 +47,7 @@ const TouristStory = () => {
                                 >
                                     <button className="btn btn-primary px-4 py-2">Share</button>
                                 </FacebookShareButton>
-                                <button
-                                    onClick={() => navigate(`/story/${story._id}`)}
-                                    className="btn btn-secondary px-4 py-2"
-                                >
-                                    View
-                                </button>
+                                
                             </div>
                         </div>
                     ))}

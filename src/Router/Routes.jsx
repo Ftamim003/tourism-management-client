@@ -26,6 +26,8 @@ import GuideApplication from "../Pages/Dashboard/TourGuideApplication/GuideAppli
 import AdminProfile from "../Pages/Dashboard/AdminProfile/AdminProfile";
 import ManageUsers from "../Pages/Dashboard/ManageUser/ManageUsers";
 import ManageCandidates from "../Pages/Dashboard/ManageCandidates/ManageCandidates";
+import TourGuideProfile from "../Pages/TourGuideProfile/TourGuideProfile";
+import MyAssignedTours from "../Pages/Dashboard/MyAssignedTour/MyAssignedTours";
 
 
 export  const router = createBrowserRouter([
@@ -54,6 +56,12 @@ export  const router = createBrowserRouter([
            path:'trips',
            element:<AllTrips></AllTrips>
         },
+        { 
+          path:'tourGuide/:id',
+          element:<TourGuideProfile></TourGuideProfile>,
+          loader:({params})=>fetch(`http://localhost:5000/tourGuide/${params.id}`)
+
+        },
         {
             path:'login',
             element:<Login></Login>
@@ -72,6 +80,11 @@ export  const router = createBrowserRouter([
         {
           path: 'bookings',
           element:<Bookings></Bookings>
+        },
+        {
+          path:'myAssignedTours',
+          element:<MyAssignedTours></MyAssignedTours>
+
         },
         {
           path: 'profile',

@@ -43,7 +43,7 @@ const Dashboard = () => {
                                 <li>
                                     <NavLink to="/dashboard/profile">
                                         <FaBook />
-                                        Manage Profile
+                                         Profile
                                     </NavLink>
                                 </li>
                                 <li>

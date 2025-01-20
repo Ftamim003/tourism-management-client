@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FacebookShareButton } from "react-share";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 
@@ -22,10 +22,7 @@ const Community = () => {
 
    
 
-    const handleAddStories = () => {
-        navigate("/add-story"); // Redirect to Add Stories page
-    };
-
+   
     return (
         <div className="py-10 bg-gray-100">
             <div className="container mx-auto px-4">
@@ -44,19 +41,14 @@ const Community = () => {
                                 >
                                     <button className="btn btn-primary px-4 py-2">Share</button>
                                 </FacebookShareButton>
-                                <button
-                                    onClick={() => navigate(`/story/${story._id}`)}
-                                    className="btn btn-secondary px-4 py-2"
-                                >
-                                    View
-                                </button>
+                               
                             </div>
                         </div>
                     ))}
                 </div>
                 <div className="flex justify-center mt-8 space-x-4">
                     
-                    <button onClick={handleAddStories} className="btn btn-success px-6 py-2">Add Story</button>
+                    
                 </div>
             </div>
         </div>

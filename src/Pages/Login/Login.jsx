@@ -1,8 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import AUthContext from "../../Context/AUthContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
+import { sendPasswordResetEmail } from "firebase/auth";
+import auth from "../../firebase/firebase.config";
 
 
 const Login = () => {
@@ -12,6 +14,7 @@ const Login = () => {
     const axiosPublic=useAxiosPublic();
     const location = useLocation();
     const navigate = useNavigate();
+    const emailRef=useRef();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -68,6 +71,34 @@ const Login = () => {
         })
     }
 
+    const handleForgetPassword = () => {
+        if (!email) {
+            console.log("No email address provided");
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "Please provide a valid email address.",
+            });
+        } else {
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Success",
+                        text: "Password reset email has been sent. Please check your inbox.",
+                    });
+                })
+                .catch((error) => {
+                    console.error("Error sending password reset email:", error);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: "Failed to send password reset email. Please try again.",
+                    });
+                });
+        }
+    };
+
     return (
         <div className="min-h-screen  flex justify-center items-center p-4">
             <div className="card bg-white shadow-lg rounded-lg w-full max-w-lg p-8">
@@ -82,6 +113,7 @@ const Login = () => {
                         <input
                             name="email"
                             type="email"
+                            
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -103,13 +135,15 @@ const Login = () => {
                         {error.login && (
                             <label className="label text-sm text-red-600">{error.login}</label>
                         )}
-                        <Link
+                        {/* <Link
                             to="/auth/forgetPassword"
                             state={{ email }}
                             className="label mt-2 text-sm text-blue-500 hover:underline"
                         >
                             Forgot password?
-                        </Link>
+                        </Link> */}
+                        <label onClick={handleForgetPassword} className="label mt-2 text-sm text-blue-500 hover:underline"> <a href="#">Forget Password?</a></label>
+
                     </div>
                     <div className="form-control mt-4">
                         <button className="btn bg-[#1C3D5A] hover:bg-[#376083] text-white py-2 px-4 rounded-lg transition-colors duration-300">

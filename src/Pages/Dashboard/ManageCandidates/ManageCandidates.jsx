@@ -109,60 +109,61 @@ const ManageCandidates = () => {
 
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
-            <h2 className="text-2xl font-bold mb-6">Manage Candidates</h2>
-            {isLoading ? (
-                <p>Loading applications...</p>
-            ) : isError ? (
-                <p className="text-red-500">Failed to load applications. Please try again.</p>
-            ) : (
-                <div className="overflow-x-auto">
-                    <table className="table-auto w-full bg-white border border-gray-300 shadow-md rounded-md">
-                        <thead>
-                            <tr className="bg-gray-200">
-                                <th className="p-3 border-b">Name</th>
-                                <th className="p-3 border-b">Email</th>
-                                <th className="p-3 border-b">Role</th>
-                                <th className="p-3 border-b">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {applications.length > 0 ? (
-                                applications.map((app) => (
-                                    <tr key={app._id} className="hover:bg-gray-100">
-                                        <td className="p-3 border-b">{app.name}</td>
-                                        <td className="p-3 border-b">{app.email}</td>
-                                        <td className="p-3 border-b">User/Tourist</td>
-                                        <td className="p-3 border-b">
-                                            <button
-                                                onClick={() => handleAccept(app.email)}
-                                                className="bg-green-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-green-600"
-                                            >
-                                                Accept
-                                            </button>
-                                            <button
-                                                onClick={() => handleReject(app.email)}
-                                                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-                                            >
-                                                Reject
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))
-                            ) : (
-                                <tr>
-                                    <td
-                                        colSpan="4"
-                                        className="text-center p-3 text-gray-500"
+    <h2 className="text-2xl font-bold mb-6">Manage Candidates</h2>
+    {isLoading ? (
+        <p>Loading applications...</p>
+    ) : isError ? (
+        <p className="text-red-500">Failed to load applications. Please try again.</p>
+    ) : (
+        <div className="overflow-x-auto">
+            {/* Add `min-w-full` and `overflow-x-auto` for responsiveness */}
+            <table className="table-auto min-w-full bg-white border border-gray-300 shadow-md rounded-md">
+                <thead>
+                    <tr className="bg-gray-200">
+                        <th className="p-3 border-b">Name</th>
+                        <th className="p-3 border-b">Email</th>
+                        <th className="p-3 border-b">Role</th>
+                        <th className="p-3 border-b">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {applications.length > 0 ? (
+                        applications.map((app) => (
+                            <tr key={app._id} className="hover:bg-gray-100">
+                                <td className="p-3 border-b">{app.name}</td>
+                                <td className="p-3 border-b">{app.email}</td>
+                                <td className="p-3 border-b">User/Tourist</td>
+                                <td className="p-3 border-b">
+                                    <button
+                                        onClick={() => handleAccept(app.email)}
+                                        className="bg-green-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-green-600"
                                     >
-                                        No applications found.
-                                    </td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                                        Accept
+                                    </button>
+                                    <button
+                                        onClick={() => handleReject(app.email)}
+                                        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                                    >
+                                        Reject
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td
+                                colSpan="4"
+                                className="text-center p-3 text-gray-500"
+                            >
+                                No applications found.
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
         </div>
+    )}
+</div>
     );
 };
 

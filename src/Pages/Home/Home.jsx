@@ -219,7 +219,7 @@ const Home = () => {
                                         <h3 className="text-xl font-semibold">{guide.name}</h3>
                                         <p className="text-gray-600">Expertise: {guide.expertise}</p>
                                         <button
-                                            onClick={() => window.location.href = `/guide-details/${guide._id}`}
+                                            onClick={() => window.location.href = `/tourGuide/${guide._id}`}
                                             className="btn btn-primary mt-4"
                                         >
                                             View Profile
