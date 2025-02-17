@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const Events = () => {
     const axiosPublic = useAxiosPublic();
@@ -36,19 +37,28 @@ const Events = () => {
         try {
             const response = await axiosPublic.post("/event-registrations", {
                 ...formData,
-                eventId: selectedEvent.id,
-                eventName: selectedEvent.name,
-                eventDate: selectedEvent.date,
-                eventLocation: selectedEvent.location,
+                // eventId: selectedEvent.id,
+                // eventName: selectedEvent.name,
+                // eventDate: selectedEvent.date,
+                // eventLocation: selectedEvent.location,
             });
 
             if (response.status === 201) {
-                alert("Registration successful!");
+                Swal.fire({
+                    title: "Registration successful!",
+                    icon: "success",
+                    draggable: true
+                  });
                 closeModal();
             }
         } catch (error) {
             console.error("Error registering for event:", error);
-            alert("Registration failed. Please try again.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+               
+              });
         }
     };
 

@@ -22,9 +22,7 @@ const PopularDestination = () => {
                         </div>
                     ))}
                 </div>
-                <div className="text-center mt-8">
-                    <button className="btn btn-primary px-6 py-2">View More</button>
-                </div>
+                
             </div>
         </div>
     );
