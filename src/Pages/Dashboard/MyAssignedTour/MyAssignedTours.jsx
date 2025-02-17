@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../Components/Hooks/useAxiosSecure';
+import AUthContext from '../../../Context/AUthContext';
 
 const MyAssignedTours = () => {
+    const {user}=useContext(AUthContext);
     const axiosSecure=useAxiosSecure();
     const [tours, setTours] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const guideName = "Guide_1"; // Replace with the authenticated user's name.
+    const guideName = user.displayName; 
 
     useEffect(() => {
         const fetchAssignedTours = async () => {

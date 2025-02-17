@@ -36,7 +36,11 @@ const TouristStory = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {stories.map(story => (
                         <div key={story._id} className="bg-white rounded-lg shadow-md p-4">
-                            <img src={story.image} alt={story.title} className="w-full h-40 object-cover rounded" />
+                              <img
+                                src={story.images[0]}
+                                alt={story.title}
+                                className="w-full h-40 object-cover rounded"
+                            />
                             <h3 className="text-xl font-semibold mt-4">{story.title}</h3>
                             <p className="text-gray-600 mt-2">{story.description.slice(0, 100)}...</p>
                             <div className="flex justify-between items-center mt-4">

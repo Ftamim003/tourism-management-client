@@ -44,8 +44,8 @@ const TourGuideProfile = () =>{
                 <div className="bg-white p-6 rounded-md shadow-md">
                     <div className="flex items-center space-x-4">
                         <img
-                            src={guide.profilePicture}
-                            alt={guide.name}
+                            src={guide?.profilePicture}
+                            alt={guide?.name}
                             className="w-24 h-24 rounded-full object-cover border"
                         />
                         <div>
@@ -56,8 +56,8 @@ const TourGuideProfile = () =>{
                     <p className="mt-4 text-gray-800">{guide.bio}</p>
                     <div className="mt-4">
                         <h3 className="text-lg font-semibold">Contact Information:</h3>
-                        <p>Email: {guide.contactInfo.email}</p>
-                        <p>Phone: {guide.contactInfo.phone}</p>
+                        <p>Email: {guide.contactInfo?.email}</p>
+                        <p>Phone: {guide.contactInfo?.phone}</p>
                     </div>
                 </div>
             )}
