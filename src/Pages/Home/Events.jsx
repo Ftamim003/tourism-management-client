@@ -1,14 +1,20 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import useAxiosPublic from "../../Components/Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Events = () => {
     const axiosPublic = useAxiosPublic();
+
+    useEffect(() => {
+        AOS.init({ duration: 1000 });
+    }, []);
+
     const events = [
         { id: 1, name: "Bichanakandi Trekking", date: "2025-03-05", location: "Sylhet", description: "Experience the serenity of Bichanakandi.", image: "https://i.ibb.co.com/7bdc38g/bichanakandi.webp" },
         { id: 2, name: "Sundarbans Wildlife Safari", date: "2025-03-12", location: "Khulna", description: "Explore the rich wildlife of Sundarbans.", image: "https://i.ibb.co.com/z7NZGJP/wild.jpg" },
-        { id: 3, name: "Rangamati Cultural Fest", date: "2025-03-25", location: "Rangamati", description: "Celebrate the vibrant culture of the Chittagong Hill .", image: "https://i.ibb.co.com/b6sChRv/culter.jpg" },
+        { id: 3, name: "Rangamati Cultural Fest", date: "2025-03-25", location: "Rangamati", description: "Celebrate the vibrant culture of the Chittagong Hill.", image: "https://i.ibb.co.com/b6sChRv/culter.jpg" },
     ];
 
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -30,25 +36,25 @@ const Events = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.name || !formData.email || !formData.contact) {
-            alert("All fields are required!");
+            Swal.fire({
+                icon: "warning",
+                title: "All fields are required!",
+                confirmButtonColor: "#ff9800"
+            });
             return;
         }
 
         try {
             const response = await axiosPublic.post("/event-registrations", {
                 ...formData,
-                // eventId: selectedEvent.id,
-                // eventName: selectedEvent.name,
-                // eventDate: selectedEvent.date,
-                // eventLocation: selectedEvent.location,
             });
 
             if (response.status === 201) {
                 Swal.fire({
                     title: "Registration successful!",
                     icon: "success",
-                    draggable: true
-                  });
+                    confirmButtonColor: "#4CAF50",
+                });
                 closeModal();
             }
         } catch (error) {
@@ -57,18 +63,18 @@ const Events = () => {
                 icon: "error",
                 title: "Oops...",
                 text: "Something went wrong!",
-               
-              });
+                confirmButtonColor: "#d32f2f"
+            });
         }
     };
 
     return (
         <div className="py-10 bg-gray-100">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-6">Upcoming Events</h2>
+                <h2 className="text-3xl font-bold text-center mb-6" data-aos="fade-down">Upcoming Events</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {events.map((event) => (
-                        <div key={event.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div key={event.id} data-aos="fade-up" className="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300">
                             <img src={event.image} alt={event.name} className="w-full h-40 object-cover" />
                             <div className="p-4">
                                 <h3 className="text-xl font-semibold">{event.name}</h3>
@@ -85,7 +91,7 @@ const Events = () => {
 
             {selectedEvent && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                    <div data-aos="zoom-in" className="bg-white p-6 rounded-lg shadow-lg w-96">
                         <h2 className="text-2xl font-bold mb-4">Register for {selectedEvent.name}</h2>
                         <form onSubmit={handleSubmit}>
                             <input

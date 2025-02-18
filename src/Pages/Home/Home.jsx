@@ -13,7 +13,9 @@ import Events from "./Events";
 import PopularDestination from "./PopularDestination";
 import { useNavigate } from "react-router-dom";
 import WhyChooseUs from "./WhyChooseUs";
-
+import FAQ from "./FAQ";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Home = () => {
     const axiosPublic = useAxiosPublic();
@@ -36,6 +38,11 @@ const Home = () => {
     const handleRedirect = () => {
         console.log("Redirect to details page");
     };
+    
+        useEffect(() => {
+            AOS.init({ duration: 1000 });
+        }, []);
+        
     return (
         <div>
             <Swiper
@@ -130,60 +137,68 @@ const Home = () => {
 
 
             <div className="bg-gray-100 py-10">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-8">
-                        <h2 className="text-4xl font-bold text-gray-800 mb-4">Welcome to Our Platform</h2>
-                        <p className="text-gray-600 text-lg">
-                            Explore what our website has to offer through an engaging video experience.
-                        </p>
-                    </div>
-                    <div className="container mx-auto px-4 sm:px-6 py-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            {/* Video 1 */}
-                            <div className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.8 }}
-                                    viewport={{ once: true }}
-                                >
-                                    <iframe
-                                        className="w-full h-64 md:h-72 lg:h-80"
-                                        src="https://www.youtube.com/embed/j5L1M7rDbL0?si=iZ6KtggUq1ptmn7y"
-                                        title="Scenic Beauti of Bandarban"
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerPolicy="strict-origin-when-cross-origin"
-                                        allowFullScreen
-                                    ></iframe>
-                                    
-                                </motion.div>
-                            </div>
+            <div className="container mx-auto px-4">
+                <div className="text-center mb-8">
+                    <h2 className="text-4xl font-bold text-gray-800 mb-4" data-aos="fade-down">
+                        Welcome to Our Platform
+                    </h2>
+                    <p className="text-gray-600 text-lg" data-aos="fade-down" data-aos-delay="200">
+                        Explore what our website has to offer through an engaging video experience.
+                    </p>
+                </div>
+                <div className="container mx-auto px-4 sm:px-6 py-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {/* Video 1 */}
+                        <div 
+                            className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" 
+                            data-aos="zoom-in" 
+                            data-aos-delay="300"
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.8 }}
+                                viewport={{ once: true }}
+                            >
+                                <iframe
+                                    className="w-full h-64 md:h-72 lg:h-80"
+                                    src="https://www.youtube.com/embed/j5L1M7rDbL0?si=iZ6KtggUq1ptmn7y"
+                                    title="Scenic Beauty of Bandarban"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                ></iframe>
+                            </motion.div>
+                        </div>
 
-                            {/* Video 2 */}
-                            <div className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    transition={{ duration: 0.8 }}
-                                    viewport={{ once: true }}
-                                >
-                                    <iframe
-                                        className="w-full h-64 md:h-72 lg:h-80"
-                                        src="https://www.youtube.com/embed/yzASVQShs6I?si=tAmBmsmcACAPbQvR"
-                                        title="Beautiful Cox's Bazar Guide"
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        referrerPolicy="strict-origin-when-cross-origin"
-                                        allowFullScreen
-                                    ></iframe>
-                                    
-                                </motion.div>
-                            </div>
+                        {/* Video 2 */}
+                        <div 
+                            className="relative group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300" 
+                            data-aos="zoom-in" 
+                            data-aos-delay="500"
+                        >
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.8 }}
+                                viewport={{ once: true }}
+                            >
+                                <iframe
+                                    className="w-full h-64 md:h-72 lg:h-80"
+                                    src="https://www.youtube.com/embed/yzASVQShs6I?si=tAmBmsmcACAPbQvR"
+                                    title="Beautiful Cox's Bazar Guide"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allowFullScreen
+                                ></iframe>
+                            </motion.div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
             <div className="container mx-auto py-10 px-4">
@@ -243,6 +258,7 @@ const Home = () => {
             <WhyChooseUs></WhyChooseUs>
             <Events></Events>
             <PopularDestination></PopularDestination>
+            <FAQ></FAQ>
         </div>
     );
 };
