@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import CountUp from "react-countup";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Users, ShieldCheck, Briefcase, Smile } from "lucide-react"; // Importing icons
 
 const WhyChooseUs = () => {
   useEffect(() => {
@@ -10,24 +11,24 @@ const WhyChooseUs = () => {
 
   const stats = [
     {
-      icon: "👷‍♂️",
+      icon: <Users size={50} className="text-black" />,
       number: 2000,
       text: "Our worldwide guide",
     },
     {
-      icon: "🤝",
+    icon: <ShieldCheck size={50} className="text-black" />,
       number: 100,
       text: "Trusted travel agency",
       suffix: "%",
     },
     {
-      icon: "🌍",
+        icon: <Briefcase size={50} className="text-black" />,
       number: 10,
       text: "Years of travel experience",
       suffix: "+",
     },
     {
-      icon: "😊",
+    icon: <Smile size={50} className="text-black" />,
       number: 90,
       text: "Our travelers are happy",
       suffix: "%",
@@ -37,7 +38,7 @@ const WhyChooseUs = () => {
   return (
     <div className="bg-gray-100 py-16">
       <div className="text-center mb-10">
-        <h3 className="text-orange-500 font-semibold">Why Choose Us</h3>
+        <h3 className="text-green-500 font-semibold">Why Choose Us</h3>
         <h2 className="text-3xl font-bold">Why You Should Travel With Us</h2>
       </div>
 
