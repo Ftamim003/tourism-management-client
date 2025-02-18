@@ -12,6 +12,7 @@ import TouristStory from "./TouristStory";
 import Events from "./Events";
 import PopularDestination from "./PopularDestination";
 import { useNavigate } from "react-router-dom";
+import WhyChooseUs from "./WhyChooseUs";
 
 
 const Home = () => {
@@ -239,6 +240,7 @@ const Home = () => {
                 </Tabs>
             </div>
             <TouristStory></TouristStory>
+            <WhyChooseUs></WhyChooseUs>
             <Events></Events>
             <PopularDestination></PopularDestination>
         </div>
