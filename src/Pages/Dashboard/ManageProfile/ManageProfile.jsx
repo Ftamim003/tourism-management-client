@@ -1,4 +1,3 @@
-
 import useBookingInfo from "../../../Components/Hooks/useInfo";
 import { useContext, useState } from "react";
 import AUthContext from "../../../Context/AUthContext";
@@ -6,13 +5,12 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Components/Hooks/useAxiosSecure";
 import useAdmin from "../../../Components/Hooks/useAdmin";
 import useGuide from "../../../Components/Hooks/useGuide";
+
 const ManageProfile = () => {
-    // Fetch user data (Assuming `useLoaderData` fetches the user info)
     const { user, setUser } = useContext(AUthContext);
     const [isAdmin] = useAdmin();
-    const [isGuide] = useGuide()
+    const [isGuide] = useGuide();
     const axiosSecure = useAxiosSecure();
-    // State for modal
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: user?.displayName || "",
@@ -26,8 +24,6 @@ const ManageProfile = () => {
                 name: user.displayName || "",
                 photo: user.photoURL || "",
             });
-
-
         } else {
             Swal.fire({
                 icon: "error",
@@ -45,8 +41,6 @@ const ManageProfile = () => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
-
-
 
     const handleSave = async () => {
         if (!user.email) {
@@ -67,14 +61,12 @@ const ManageProfile = () => {
             const result = response.data;
 
             if (result.success) {
-                // Update user context
                 setUser((prevUser) => ({
                     ...prevUser,
                     displayName: formData.name,
                     photoURL: formData.photo,
                 }));
 
-                // Show success message
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -83,7 +75,6 @@ const ManageProfile = () => {
                     timer: 1500,
                 });
 
-                // Close the modal
                 setIsModalOpen(false);
             } else {
                 Swal.fire({
@@ -102,50 +93,59 @@ const ManageProfile = () => {
         }
     };
 
-
     return (
         <div className="p-6 bg-gray-100 min-h-screen">
-            {/* Welcome Message */}
-            <h2 className="text-2xl font-bold mb-4">Welcome, {user?.displayName}!</h2>
+            <h2 className="text-2xl font-bold mb-4">Welcome, {user?.displayName || "User"}!</h2>
 
-            {/* User Information */}
             <div className="bg-white shadow-md rounded-lg p-6">
-                <img
-                    src={user?.photoURL || "https://via.placeholder.com/150"}
-                    alt="User Profile"
-                    className="w-24 h-24 rounded-full mb-4"
-                />
-                <h3 className="text-xl font-semibold">{user?.displayName}</h3>
-                <p className="text-gray-600">Email: {user?.email}</p>
-                <p className="text-gray-600">
-                    Role: {isAdmin ? "Admin" : isGuide ? "Guide" : "User"}
-                </p>
+                <div className="flex items-center space-x-4 mb-4">
+                    <img
+                        src={user?.photoURL || "https://via.placeholder.com/150"}
+                        alt="User Profile"
+                        className="w-24 h-24 rounded-full"
+                    />
+                    <div>
+                        <h3 className="text-xl font-semibold">{user?.displayName || "N/A"}</h3>
+                        <p className="text-gray-600">Role: {isAdmin ? "Admin" : isGuide ? "Guide" : "User"}</p>
+                    </div>
+                </div>
+
+                <div className="space-y-4 border rounded-lg p-6 shadow-md bg-white">
+                    <p className="text-gray-700 border-b pb-2">
+                        <strong className="text-gray-900">First Name:</strong> {user?.displayName || "Not provided"}
+                    </p>
+                    <p className="text-gray-700 border-b pb-2">
+                        <strong className="text-gray-900">Last Name:</strong> {user?.lastName || "Not provided"}
+                    </p>
+                    <p className="text-gray-700 border-b pb-2">
+                        <strong className="text-gray-900">Email:</strong> {user?.email || "Not provided"}
+                    </p>
+                    <p className="text-gray-700 border-b pb-2">
+                        <strong className="text-gray-900">Phone Number:</strong> {user?.phone || "Not provided"}
+                    </p>
+                    <p className="text-gray-700 border-b pb-2">
+                        <strong className="text-gray-900">Date of Birth:</strong> {user?.dob || "Not provided"}
+                    </p>
+                    <p className="text-gray-700 border-b pb-2">
+                        <strong className="text-gray-900">Address:</strong> {user?.address || "Not provided"}
+                    </p>
+
+                    <button
+                        onClick={handleEdit}
+                        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition"
+                    >
+                        Edit Profile
+                    </button>
+                </div>
 
 
-                {/* Edit Profile Button */}
-                <button
-                    onClick={handleEdit}
-                    className="btn btn-primary mt-4"
-                >
-                    Edit Profile
-                </button>
-
-                {/* Apply for Tour Guide Button */}
-                {/* <button
-                    onClick={() => (window.location.href = "/join-tour-guide")}
-                    className="btn btn-secondary mt-4 ml-4"
-                >
-                    Apply for Tour Guide
-                </button> */}
             </div>
 
-            {/* Edit Profile Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     <div className="bg-white p-6 rounded-lg shadow-lg">
                         <h3 className="text-lg font-bold mb-4">Edit Profile</h3>
 
-                        {/* Edit Form */}
                         <form>
                             <div className="mb-4">
                                 <label className="block text-gray-700">Name</label>
@@ -169,28 +169,27 @@ const ManageProfile = () => {
                                 />
                             </div>
 
-                            {/* Email and Role (Read-Only) */}
                             <div className="mb-4">
                                 <label className="block text-gray-700">Email</label>
                                 <input
                                     type="email"
-                                    value={user?.email}
+                                    value={user?.email || "Not provided"}
                                     readOnly
                                     className="w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
                                 />
                             </div>
+
                             <div className="mb-4">
                                 <label className="block text-gray-700">Role</label>
                                 <input
                                     type="text"
-                                    value='User'
+                                    value={isAdmin ? "Admin" : isGuide ? "Guide" : "User"}
                                     readOnly
                                     className="w-full border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
                                 />
                             </div>
                         </form>
 
-                        {/* Modal Buttons */}
                         <div className="flex justify-end space-x-4">
                             <button
                                 onClick={handleCloseModal}
